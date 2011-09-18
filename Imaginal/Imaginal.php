@@ -16,6 +16,9 @@ class Imaginal
 
     public function __construct($dir, $filename)
     {
+        if (!extension_loaded('gd'))
+            throw new FileException('GD library is not enabled.');
+
         $ext = strtolower(substr(strrchr($filename,'.'),1));
 
         if ($ext === 'jpg' || $ext === 'jpeg') {
@@ -61,7 +64,7 @@ class Imaginal
     public function save($prefix)
     {
         if ($this->ext === 'png')
-            return imagepng($this->newImage, $this->dir.'/'.$prefix.$this->filename);
+            return imagepng($this->newImage, $this->dir.'/'.$prefix.$this->filename, 0);
         else if ($this->ext === 'gif')
             return imagegif($this->newImage, $this->dir.'/'.$prefix.$this->filename);
         else

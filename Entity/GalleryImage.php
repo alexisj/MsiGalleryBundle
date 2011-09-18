@@ -75,8 +75,6 @@ class GalleryImage
             $im = new Imaginal($this->getUploadDir(), $this->getFilename());
             $im->resize(150);
             $im->save('t_');
-            $im->resize(300);
-            $im->save('tT_');
         }
 
         unset($this->file);
