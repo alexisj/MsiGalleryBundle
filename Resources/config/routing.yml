@@ -1,0 +1,7 @@
+admin_gallery:
+    resource: "@MsiGalleryBundle/Resources/config/routing/admin/gallery.yml"
+    prefix: /admin/gallery
+
+admin_gallery_image:
+    resource: "@MsiGalleryBundle/Resources/config/routing/admin/gallery_image.yml"
+    prefix: /admin/gallery/image

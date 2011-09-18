@@ -1,0 +1,27 @@
+gallery:
+  pattern:  /
+  defaults: { _controller: MsiGalleryBundle:admin\Gallery:index }
+
+gallery_batch:
+  pattern:  /batch/
+  defaults: { _controller: MsiGalleryBundle:admin\Gallery:batch }
+
+gallery_new:
+  pattern:  /new/
+  defaults: { _controller: MsiGalleryBundle:admin\Gallery:new }
+
+gallery_create:
+  pattern:  /create/
+  defaults: { _controller: MsiGalleryBundle:admin\Gallery:create }
+    
+gallery_edit:
+  pattern:  /{id}/edit/
+  defaults: { _controller: MsiGalleryBundle:admin\Gallery:edit }
+  requirements:
+    id: \d+
+
+gallery_update:
+  pattern:  /{id}/update/
+  defaults: { _controller: MsiGalleryBundle:admin\Gallery:update }
+  requirements:
+    id: \d+
