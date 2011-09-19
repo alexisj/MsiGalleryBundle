@@ -3,7 +3,8 @@
 namespace Msi\GalleryBundle\Entity;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Msi\GalleryBundle\Imaginal\Imaginal;
+use Msi\GalleryBundle\imaginal\src\Imaginal\Imaginal;
+use Symfony\Component\Validator\Constraints as Assert;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -41,6 +42,9 @@ class GalleryImage
      */
     private $filename;
 
+    /**
+     * @Assert\File(maxSize="6000000")
+     */
     protected $file = null;
 
     public function __toString()
@@ -73,7 +77,7 @@ class GalleryImage
             $this->file->move($this->getUploadDir(), $this->getFilename());
             // Make thumb.
             $im = new Imaginal($this->getUploadDir(), $this->getFilename());
-            $im->resize(150);
+            $im->resize(200, 1000);
             $im->save('t_');
         }
 
