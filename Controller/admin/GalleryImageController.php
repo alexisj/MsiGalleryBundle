@@ -10,32 +10,65 @@ use Symfony\Component\HttpFoundation\Response;
 
 class GalleryImageController extends Controller
 {
-    
-    public function indexAction()
-    {
+  public function indexAction()
+  {
+    $images = $this->get('doctrine')->getRepository('MsiGalleryBundle:GalleryImage')->findAll();
+    return $this->render('MsiGalleryBundle:GalleryImage:admin/index.html.twig', array('images' => $images));
+  }
 
+  public function newAction()
+  {
+    $this->createForm(new GalleryImageType, new GalleryImage);
+    return $this->render('MsiGalleryBundle:GalleryImage:admin/new.html.twig', array('form' => $form->createView()))
+  }
+
+  public function createAction(Request $request)
+  {
+    $em = $this->get('doctrine')->getEntityManager();
+    $entity = new GalleryImage;
+    $form = $this->createForm(new GalleryImageType, $entity);
+    $form->bindRequest($request);
+
+    if ($form->isValid()) {
+      $em->persist($entity);
+      $em->flush();
+
+      return $this->redirect($this->generateUrl('admin_gallery_image'));
     }
 
-    public function newAction()
-    {
-        $entity = new GalleryImage;
-        $form = $this->createForm(new GalleryImageType, $entity);
-        return $this->render('MsiGalleryBundle:GalleryImage:admin/new.html.twig', array('form' => $form->createView()));
+    return $this->render('MsiGalleryBundle:GalleryImage:admin/new.html.twig', array('form' => $form->createView()))
+  }
+
+  public function editAction($id)
+  {
+    $entity = $this->get('doctrine')->getRepository('MsiGalleryBundle:GalleryImage')->find($id);
+    $this->createForm(new GalleryImageType, $entity);
+    return $this->render('MsiGalleryBundle:GalleryImage:admin/edit.html.twig', array('form' => $form->createView()))
+  }
+
+  public function updateAction(Request $request, $id)
+  {
+    $em = $this->get('doctrine')->getEntityManager();
+    $entity = $this->get('doctrine')->getRepository('MsiGalleryBundle:GalleryImage')->find($id);
+    $form = $this->createForm(new GalleryImageType, $entity);
+    $form->bindRequest($request);
+
+    if ($form->isValid()) {
+      $em->persist($entity);
+      $em->flush();
+
+      return $this->redirect($this->generateUrl('admin_gallery_image'));
     }
 
-    public function createAction()
-    {
-        $em = $this->get('doctrine')->getEntityManager();
-        $entity = new GalleryImage;
-        $form = $this->createForm(new GalleryImageType, $entity);
-        $form->bindRequest($this->getRequest());
+    return $this->render('MsiGalleryBundle:GalleryImage:admin/edit.html.twig', array('form' => $form->createView()))
+  }
 
-        if ($form->isValid()) {
-            $em->persist($entity);
-            $em->flush();
-        return $this->redirect($this->generateUrl('gallery_image_new'));
-        } else {
-            return $this->render('MsiGalleryBundle:GalleryImage:admin/new.html.twig', array('form' => $form->createView()));
-        }
-    }    
+  public function deleteAction()
+  {
+    $em = $this->get('doctrine')->getEntityManager();
+    $entity = $this->get('doctrine')->getRepository('MsiGalleryBundle:GalleryImage')->find($id);
+    $em->remove($entity);
+    $em->flush();
+    return $this->redirect($this->generateUrl('admin_gallery_image'));
+  }
 }

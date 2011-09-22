@@ -9,3 +9,7 @@ admin_gallery_image:
 gallery:
     pattern:  /gallery/
     defaults: { _controller: MsiGalleryBundle:Gallery:index }
+
+gallery_image:
+    pattern:  /gallery/{slug}/
+    defaults: { _controller: MsiGalleryBundle:GalleryImage:index }
