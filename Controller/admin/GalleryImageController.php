@@ -18,8 +18,8 @@ class GalleryImageController extends Controller
 
   public function newAction()
   {
-    $this->createForm(new GalleryImageType, new GalleryImage);
-    return $this->render('MsiGalleryBundle:GalleryImage:admin/new.html.twig', array('form' => $form->createView()))
+    $form = $this->createForm(new GalleryImageType, new GalleryImage);
+    return $this->render('MsiGalleryBundle:GalleryImage:admin/new.html.twig', array('form' => $form->createView()));
   }
 
   public function createAction(Request $request)
@@ -36,14 +36,14 @@ class GalleryImageController extends Controller
       return $this->redirect($this->generateUrl('admin_gallery_image'));
     }
 
-    return $this->render('MsiGalleryBundle:GalleryImage:admin/new.html.twig', array('form' => $form->createView()))
+    return $this->render('MsiGalleryBundle:GalleryImage:admin/new.html.twig', array('form' => $form->createView()));
   }
 
   public function editAction($id)
   {
     $entity = $this->get('doctrine')->getRepository('MsiGalleryBundle:GalleryImage')->find($id);
-    $this->createForm(new GalleryImageType, $entity);
-    return $this->render('MsiGalleryBundle:GalleryImage:admin/edit.html.twig', array('form' => $form->createView()))
+    $form = $this->createForm(new GalleryImageType, $entity);
+    return $this->render('MsiGalleryBundle:GalleryImage:admin/edit.html.twig', array('form' => $form->createView()));
   }
 
   public function updateAction(Request $request, $id)
@@ -60,7 +60,7 @@ class GalleryImageController extends Controller
       return $this->redirect($this->generateUrl('admin_gallery_image'));
     }
 
-    return $this->render('MsiGalleryBundle:GalleryImage:admin/edit.html.twig', array('form' => $form->createView()))
+    return $this->render('MsiGalleryBundle:GalleryImage:admin/edit.html.twig', array('form' => $form->createView()));
   }
 
   public function deleteAction()
