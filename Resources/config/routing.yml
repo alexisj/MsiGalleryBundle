@@ -5,3 +5,7 @@ admin_gallery:
 admin_gallery_image:
     resource: "@MsiGalleryBundle/Resources/config/routing/admin/gallery_image.yml"
     prefix: /admin/gallery/image
+
+gallery:
+    pattern:  /gallery/
+    defaults: { _controller: MsiGalleryBundle:Gallery:index }

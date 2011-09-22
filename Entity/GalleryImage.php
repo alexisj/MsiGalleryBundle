@@ -54,7 +54,7 @@ class GalleryImage
 
     protected function getUploadDir()
     {
-        return __DIR__.'/../../../../web/uploads/gallery';
+        return __DIR__.'/../../../../web/bundles/msihappy/uploads';
     }
 
     /**
@@ -77,7 +77,7 @@ class GalleryImage
             $this->file->move($this->getUploadDir(), $this->getFilename());
             // Make thumb.
             $im = new Imaginal($this->getUploadDir(), $this->getFilename());
-            $im->resize(200, 1000);
+            $im->resize(225, 200);
             $im->save('t_');
         }
 

@@ -1,0 +1,9 @@
+{% extends '::layout.html.twig' %}
+
+{% block body %}
+    <div id="gallery">
+        {% for image in records %}
+            <a href="{{ asset('/bundles/msihappy/uploads/'~image.filename) }}" rel="gallery"><img src="{{ asset('/bundles/msihappy/uploads/t_'~image.filename) }}" alt="0" /></a>
+        {% endfor %}
+    </div>
+{% endblock %}
